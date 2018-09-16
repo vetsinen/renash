@@ -24,6 +24,7 @@
     <table class="table">
         <thead class="thead-light">
         <tr>
+            <th scope="col">#</th>
             <th scope="col">Coin name</th>
             <th scope="col">Price</th>
             <th scope="col">Complexity</th>
@@ -31,33 +32,36 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Monero</td>
+        <tr  v-for="(coin,index) in coins">
+            <td>{{index}}</td>
+            <td>
+                <button type="button" class="btn" v-on:click="current=index"
+                        data-toggle="modal" data-target="#order">{{coin.id}}</button>
+
+            </td>
             <td>3000</td>
-            <td>2.44</td>
+            <td>{{coin.coef}}</td>
             <td>0.45</td>
         </tr>
         </tbody>
     </table>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-        Запустить модальное окно
-    </button>
+
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+    <div class="modal fade" id="order" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Create order for {{coins[current].id}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Lorem {{message}} dolor sit amet, consectetur adipisicing.
+                    Lorem {{coins[current].id}} dolor sit amet, consectetur adipisicing.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -68,8 +72,7 @@
     </div>
 
     <footer>
-        footer: For guide and {{ message }} on how to
-        <button v-on:click="next">next</button>
+        Blockchain Hackathon
     </footer>
 
 </main>
@@ -78,6 +81,7 @@
         el: '#app',
         data: {
             message: 'Hello Vue!',
+            current:0,
             coins: [
                 {id:"BTH",coef:1.56},
                 {id:"DOGE",coef:4.12},
@@ -95,7 +99,7 @@
             });
         },
         methods: {
-            selected: function (id) {
+            order: function (id) {
                 console.log(id);
             },
             next: function () {
