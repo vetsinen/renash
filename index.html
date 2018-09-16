@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>EvenNicerHash</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <script src="jquery.js"></script>
+    <script src="bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+
+    <script src="vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+
+</head>
+
+<body>
+
+<main role="main" id="app" class="container">
+    <h2>Choose coin</h2>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Coin name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Complexity</th>
+            <th scope="col">Coeficient</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Monero</td>
+            <td>3000</td>
+            <td>2.44</td>
+            <td>0.45</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        Запустить модальное окно
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Lorem {{message}} dolor sit amet, consectetur adipisicing.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        footer: For guide and {{ message }} on how to
+        <button v-on:click="next">next</button>
+    </footer>
+
+</main>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            coins: [
+                {id:"BTH",coef:1.56},
+                {id:"DOGE",coef:4.12},
+                {id:"XEM",coef:2.11}
+            ]
+        },
+        created: function () {
+            console.log('created vue');
+            this.$http.get('http://jsonplaceholder.typicode.com/users').then(response => {
+                // get body data
+                this.users = response.body;
+                console.log(this.users);
+            }, response => {
+                // error callback
+            });
+        },
+        methods: {
+            selected: function (id) {
+                console.log(id);
+            },
+            next: function () {
+                console.log('ok');
+                this.evbar();
+            },
+            evbar: function () {
+            }
+        }
+    })
+
+</script>
+</body>
+
+</html>
